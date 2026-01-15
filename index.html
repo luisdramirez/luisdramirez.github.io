@@ -1,23 +1,92 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px Courier; color: #000000; -webkit-text-stroke: #eae96f; background-color: #000000; background-color: rgba(0, 0, 0, 0)}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Research Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;h1&gt;Hello World&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1">&lt;p&gt;I'm hosted with GitHub Pages.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="nav-header">
+                <h1>Luis D. Ramirez, PhD</h1>
+                <p>Postdoctoral Researcher</p>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-tab="landing">Home</li>
+                <li data-tab="cv">CV</li>
+                <li data-tab="publications">Publications</li>
+                <li data-tab="code">Code</li>
+                <li data-tab="ramblings">Ramblings</li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <section id="landing" class="tab-content active">
+                <div class="fade-group">
+                    <h2>Welcome</h2>
+                    <p>Research focus and introduction goes here.</p>
+                </div>
+            </section>
+
+            <section id="cv" class="tab-content">
+                <div class="fade-group">
+                    <h2>Curriculum Vitae</h2>
+                    <div class="cv-item">
+                        <h3>Education</h3>
+                        <p>PhD in ...</p>
+                    </div>
+                    <div class="cv-item">
+                        <h3>Experience</h3>
+                        <p>Researcher at ...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="publications" class="tab-content">
+                <div class="fade-group">
+                    <h2>Publications</h2>
+                    <ul class="pub-list">
+                        <li>
+                            <span class="year">2025</span>
+                            <span class="title">Title of Research Paper</span>
+                            <span class="journal">Journal Name</span>
+                        </li>
+                        <li>
+                            <span class="year">2024</span>
+                            <span class="title">Another Significant Work</span>
+                            <span class="journal">Conference Proceedings</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="code" class="tab-content">
+                <div class="fade-group">
+                    <h2>Code & Projects</h2>
+                    <div class="code-item">
+                        <h3>Project Alpha</h3>
+                        <p>Description of the codebase and its research application.</p>
+                        <a href="#">View on GitHub</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ramblings" class="tab-content">
+                <div class="fade-group">
+                    <h2>Ramblings</h2>
+                    <article>
+                        <h3>Thoughts on Methodology</h3>
+                        <p>Short blog post or thought piece...</p>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,208 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    /* Light */
+    background-color: #ffffff;
+    color: #000000;
+    line-height: 1.6;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+/* Typography Weights */
+h1,
+h2,
+h3 {
+    font-weight: 500;
+    /* Medium */
+    margin-bottom: 1rem;
+}
+
+p,
+li,
+span {
+    font-weight: 300;
+    /* Light */
+}
+
+strong,
+b {
+    font-weight: 400;
+    /* Regular */
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    width: 250px;
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid #f0f0f0;
+    /* Very subtle separator, optional */
+}
+
+.nav-header {
+    margin-bottom: 40px;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    cursor: pointer;
+    padding: 10px 0;
+    font-size: 1.1rem;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0.5;
+}
+
+.nav-links li:hover {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+.nav-links li.active {
+    opacity: 1;
+    font-weight: 400;
+    /* Regular */
+}
+
+/* Content Area */
+.content {
+    flex: 1;
+    padding-left: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.tab-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    position: absolute;
+    top: 50%;
+    left: 60px;
+    /* Match padding-left of .content */
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.tab-content.active {
+    display: block;
+    opacity: 1;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-48%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+}
+
+/* Fade Away Effect on Hover */
+/* When .fade-group is hovered, direct children that are NOT hovered fade out */
+.fade-group:hover>*:not(:hover) {
+    opacity: 0.2;
+    filter: blur(0.5px);
+}
+
+.fade-group>* {
+    transition: opacity 0.6s ease, filter 0.6s ease;
+    margin-bottom: 2rem;
+}
+
+/* Specific Content Styles */
+.pub-list {
+    list-style: none;
+}
+
+.pub-list li {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.pub-list .year {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    font-weight: 400;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+    transition: border-bottom-color 0.3s ease;
+}
+
+a:hover {
+    border-bottom-color: transparent;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        margin-bottom: 40px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 0;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .content {
+        padding-left: 0;
+        display: block;
+    }
+
+    .tab-content {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        transform: none;
+        opacity: 1;
+    }
+
+    .tab-content.active {
+        animation: none;
+    }
+}
