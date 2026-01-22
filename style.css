@@ -75,7 +75,9 @@ b {
 
 .nav-links li:hover {
     opacity: 1;
-    transform: translateX(5px);
+    transform: translateX(5px) scale(1.1);
+    color: #00008B;
+    /* Dark Blue */
 }
 
 .nav-links li.active {
@@ -132,8 +134,15 @@ b {
 }
 
 .fade-group>* {
-    transition: opacity 0.6s ease, filter 0.6s ease;
+    transition: opacity 0.6s ease, filter 0.6s ease, transform 0.3s ease, color 0.3s ease;
     margin-bottom: 2rem;
+    transform-origin: left center;
+}
+
+.fade-group>*:hover {
+    transform: scale(1.02);
+    color: #00008B;
+    /* Dark Blue */
 }
 
 /* Specific Content Styles */
@@ -163,6 +172,8 @@ a {
 
 a:hover {
     border-bottom-color: transparent;
+    color: #00008B;
+    font-size: 1.05em;
 }
 
 /* Responsive */
