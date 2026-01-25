@@ -172,6 +172,21 @@ a:hover {
     font-size: 1.05em;
 }
 
+/* Noise Overlay */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    mix-blend-mode: hard-light; /* Helps it blend nicely or just cover */
+    background: #808080; /* Neutral gray background for the noise to sit on if needed */
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     body {
