@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Configuration
+    const CONFIG = {
+        ENABLE_NOISE_ANIMATION: false // Set to true to enable the SF sweep animation
+    };
+
     // Handle CV Link separately
     const cvLink = document.getElementById('cv-link');
     if (cvLink) {
@@ -130,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetTab = link.getAttribute('data-tab');
             
             // If going TO projects, use noise
-            if (targetTab === 'projects') {
+            if (targetTab === 'projects' && CONFIG.ENABLE_NOISE_ANIMATION) {
                 runNoiseTransition(() => {
                     instantTabSwitch(targetTab, link);
                 });
