@@ -140,6 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => {
             const targetTab = link.getAttribute('data-tab');
             
+            // Update URL hash without scrolling
+            history.pushState(null, null, `#${targetTab}`);
+
             // If going TO projects, use noise
             if (targetTab === 'projects' && CONFIG.ENABLE_NOISE_ANIMATION) {
                 runNoiseTransition(() => {
@@ -151,4 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Check for hash in URL on load
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        const activeLink = document.querySelector(`.nav-links li[data-tab="${hash}"]`);
+        if (activeLink) {
+            // Trigger click to reuse logic, but maybe we want to skip animation on initial load?
+            // For now, let's just trigger the click so it behaves consistently.
+            activeLink.click();
+        }
+    }
 });
