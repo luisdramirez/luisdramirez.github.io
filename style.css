@@ -78,7 +78,7 @@ b {
     opacity: 0.5;
 }
 
-.nav-links li:hover {
+.nav-links li:hover:not(.active) {
     opacity: 1;
     transform: translateX(5px) scale(1.1);
     color: #00008B;
