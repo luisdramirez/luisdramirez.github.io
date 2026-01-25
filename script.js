@@ -1,5 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.nav-links li');
+    // Handle CV Link separately
+    const cvLink = document.getElementById('cv-link');
+    if (cvLink) {
+        cvLink.addEventListener('click', () => {
+            window.open('https://drive.google.com/file/d/1qHXQXPom4qjVgArRiF1QsM0I6sQvYkfp/view?usp=sharing', '_blank');
+        });
+    }
+
+    const navLinks = document.querySelectorAll('.nav-links li[data-tab]');
     const tabContents = document.querySelectorAll('.tab-content');
 
     navLinks.forEach(link => {
