@@ -143,6 +143,21 @@ b {
     font-weight: 400;
 }
 
+.pub-list .title {
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+    font-size: 1.1rem;
+}
+
+.pub-list .authors {
+    margin-bottom: 0.2rem;
+}
+
+.pub-list .journal {
+    color: #555;
+    font-size: 0.95rem;
+}
+
 a {
     color: #000;
     text-decoration: none;
