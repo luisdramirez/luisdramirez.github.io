@@ -93,6 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
                      void newTab.offsetWidth;
                      newTab.classList.add('active');
                      newTab.style.opacity = '1';
+                     // Reset scroll
+                     document.querySelector('.content').scrollTop = 0;
                  }
              }, 400); 
          } else {
@@ -101,6 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
                  newTab.classList.add('active');
                  newTab.style.display = 'block';
                  setTimeout(() => newTab.style.opacity = '1', 10);
+                 // Reset scroll
+                 document.querySelector('.content').scrollTop = 0;
              }
          }
     }
@@ -127,6 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
             newTab.style.display = 'block';
             newTab.classList.add('active');
             newTab.style.opacity = '1';
+            // Reset scroll
+            document.querySelector('.content').scrollTop = 0;
         }
     }
 
