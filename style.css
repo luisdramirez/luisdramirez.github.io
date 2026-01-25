@@ -95,9 +95,7 @@ b {
 .content {
     flex: 1;
     padding-left: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: block; /* Changed from flex to block to fix scrolling issues */
     position: relative;
     /* Enable scrolling for long content like projects */
     overflow-y: auto;
