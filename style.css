@@ -144,6 +144,14 @@ b {
     }
 }
 
+/* Profile Picture */
+.profile-picture {
+    width: 200px;
+    height: auto;
+    margin-bottom: 2rem;
+    display: block;
+}
+
 /* Specific Content Styles */
 .pub-list {
     list-style: none;
@@ -286,5 +294,11 @@ a:hover {
 
     .tab-content.active {
         animation: none;
+    }
+
+    .profile-picture {
+        width: 150px;
+        height: auto;
+        margin-bottom: 1.5rem;
     }
 }
