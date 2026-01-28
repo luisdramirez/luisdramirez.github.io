@@ -322,3 +322,47 @@ a:hover {
         margin-bottom: 1.5rem;
     }
 }
+
+/* Dark Mode (OS Preference) */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+
+    /* Links */
+    a {
+        color: #e0e0e0;
+        border-bottom-color: #e0e0e0;
+    }
+
+    a:hover {
+        color: #87CEEB; /* SkyBlue */
+        border-bottom-color: transparent;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        border-right-color: #333;
+    }
+
+    .nav-links li:hover:not(.active) {
+        color: #87CEEB;
+    }
+
+    /* Profile Picture Glow */
+    .profile-picture-wrapper::after {
+        box-shadow: inset 0 0 2px 1px #121212;
+    }
+
+    /* Project Item Citation */
+    .project-item .citation {
+        color: #bbb;
+        border-left-color: #333;
+    }
+
+    /* Publication Journal */
+    .pub-list .journal {
+        color: #bbb;
+    }
+}
