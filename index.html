@@ -16,21 +16,49 @@
             </div>
             <ul class="nav-links">
                 <li class="active" data-tab="landing">Home</li>
+                <li data-tab="bio">Bio</li>
                 <li data-tab="publications">Publications</li>
                 <li data-tab="projects">Projects</li>
+                <li data-tab="presentations">Presentations</li>
+                <li data-tab="awards">Awards & Honors</li>
                 <li id="cv-link">CV</li>
             </ul>
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <span class="theme-icon theme-icon-moon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                </span>
+                <span class="theme-icon theme-icon-sun" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </span>
+            </button>
         </nav>
 
         <main class="content">
             <section id="landing" class="tab-content active">
-                <div class="fade-group">
+                <div class="fade-group landing-layout">
                     <div class="profile-picture-wrapper">
                         <img src="assets/profile.jpg" alt="Luis D. Ramirez" class="profile-picture">
                     </div>
-                    <p>I'm a researcher focused on understanding how the human brain sees the world. My investigations
-                        combine psychophysics, computational modeling, and fMRI.</p>
-                    <br>
+                    <div class="landing-text">
+                        <p>I'm a researcher interested in understanding how the brain represents the visual world. My
+                            investigations combine psychophysics, computational modeling, and fMRI.</p>
+                        <br>
+                        <p><a href="https://scholar.google.com/citations?user=M6b2yYQAAAAJ&hl=en" target="_blank">Google
+                                Scholar</a>. <a href="https://github.com/luisdramirez" target="_blank">GitHub</a>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="bio" class="tab-content">
+                <div class="fade-group">
                     <p>Currently, as a postdoctoral researcher in the <a href="https://serenceslab.ucsd.edu">Serences
                             Lab at UCSD</a>, I'm studying the encoding of image statistics in early visual cortex and
                         its interaction with sensory and perceptual history.</p>
@@ -48,7 +76,7 @@
                     </p>
                     <br>
                     <p>I earned a BSc in Science and Technology Studies at NYU Tandon School of Engineering, where I
-                        exposed myself to philosophy and history of science, physics, and neuroscience all in the aim of
+                        explored philosophy and history of science, physics, and neuroscience all in the aim of
                         understanding how the brain, and societies, make sense of reality. I'm grateful that I learned
                         that our understanding of reality (ie physics) is deeply intertwined with our understanding of
                         the brain (ie neuroscience, psychology). You can imagine my surprise when I learned about
@@ -57,9 +85,26 @@
                         the NIH BP-ENDURE program).</p>
                     <br>
                     <p>And here we are, more than a decade later.</p>
-                    <br>
-                    <p><a href="https://scholar.google.com/citations?user=M6b2yYQAAAAJ&hl=en" target="_blank">Google
-                            Scholar</a>. <a href="https://github.com/luisdramirez" target="_blank">GitHub</a>.</p>
+
+                    <h3 style="margin-top: 3rem; margin-bottom: 1.5rem;">Press</h3>
+                    <ul class="pub-list">
+                        <li>
+                            <span class="year">2025</span>
+                            <span class="title"><a href="https://doi.org/10.1523/JNEUROSCI.0251-25.2025"
+                                    target="_blank">Attention alters population spatial frequency tuning</a></span>
+                            <span class="journal">Featured in <i>Journal of Neuroscience</i>, August 26, 2025 (Ramirez
+                                et al. 2025).</span>
+                        </li>
+                        <li>
+                            <span class="year">2025</span>
+                            <span class="title"><a
+                                    href="https://www.thetransmitter.org/funding/a-gut-punch-how-u-s-neuroscience-trainees-are-grappling-with-diversity-based-funding-flux/"
+                                    target="_blank">‘A gut punch’: How U.S. neuroscience trainees are grappling with
+                                    diversity-based funding flux</a></span>
+                            <span class="journal"><i>The Transmitter</i>. Feature by Calli McMurray, Angie Voyles
+                                Askham, & Claudia López Lloreda.</span>
+                        </li>
+                    </ul>
                 </div>
             </section>
 
@@ -69,92 +114,139 @@
                             href="https://scholar.google.com/citations?user=M6b2yYQAAAAJ&hl=en" target="_blank">Google
                             Scholar</a>. <a href="https://github.com/luisdramirez" target="_blank">GitHub</a>.</p>
 
-                    <div class="project-item">
-                        <h3>The Population Spatial Frequency Toolbox (pSF-Toolbox)</h3>
-                        <p class="citation"><b>Ramirez, L. D.</b>, Wang, F., Wiecek, E., Vinke, L. N., & Ling, S.
-                            2026. The Population Spatial Frequency Toolbox. <i>Journal of Open Research Software</i>.
-                            <a href="https://github.com/luisdramirez/pSF-Toolbox" target="_blank">In Press</a>.
-                        </p>
-                        <p>We developed an <b>open-source MATLAB package</b> to provide a standardized, reproducible
-                            pipeline for characterizing population spatial frequency tuning (pSFT) from fMRI data. The
-                            toolbox
-                            facilitates everything from stimulus generation to voxel-wise parameter optimization,
-                            bridging the gap between raw BOLD signals and interpretable neural tuning curves. It
-                            includes a <b>measure-pSFT</b> module for Psychtoolbox-based stimulus presentation and an
-                            <b>estimate-pSFT</b> module for fitting log-Gaussian models to voxel data. To ensure
-                            computational rigor, we included a <b>validation sub-module</b> that uses synthetic BOLD
-                            data to benchmark parameter recovery across varying signal-to-noise ratios. The pSFT
-                            approach has been successfully deployed across multiple studies (see below).
-                        </p>
+                    <div class="project-item expandable-project-item">
+                        <div class="project-content">
+                            <div class="project-text">
+                                <h3>The Population Spatial Frequency Toolbox</h3>
+                                <p class="citation"><b>Ramirez, L. D.</b>, Wang, F., Wiecek, E., Vinke, L. N., & Ling, S.
+                                    2026. The Population Spatial Frequency Toolbox. <i>Journal of Open Research Software</i>.
+                                    <a href="https://doi.org/10.5334/jors.610"
+                                        target="_blank">https://doi.org/10.5334/jors.610</a>.
+                                </p>
+                                <p>We developed an <b>open-source MATLAB package</b> to provide a standardized, reproducible
+                                    pipeline for characterizing population spatial frequency tuning (pSFT) from fMRI data. The
+                                    toolbox facilitates stimulus generation, data collection, and voxel-wise parameter
+                                    optimization,
+                                    bridging the gap between raw BOLD signals and interpretable neural tuning curves. It
+                                    includes a <b>measure-pSFT</b> module for Psychtoolbox-based stimulus presentation and an
+                                    <b>estimate-pSFT</b> module for fitting log-Gaussian models to voxel data. To ensure
+                                    computational rigor, we included a <b>validation sub-module</b> that uses synthetic BOLD
+                                    data to benchmark parameter recovery across varying signal-to-noise ratios. The pSFT
+                                    approach has been successfully deployed across multiple studies (see below).
+                                </p>
+                            </div>
+                            <div class="project-image">
+                                <img src="assets/project_figures/The population spatial frequency toolbox.jpg"
+                                    alt="The Population Spatial Frequency Toolbox Figure">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="project-item">
-                        <h3>Attention Alters Population Spatial Frequency Tuning</h3>
-                        <p class="citation"><b>Ramirez, L. D.</b>, Wang, F. & Ling, S. 2025. Attention alters
-                            population spatial frequency tuning. <i>Journal of Neuroscience</i>. <a
-                                href="https://doi.org/10.1523/JNEUROSCI.0251-25.2025"
-                                target="_blank">https://doi.org/10.1523/JNEUROSCI.0251-25.2025</a>.</p>
-                        <p>This project utilized <b>pSFT</b> to investigate how feature-based attention reshapes
-                            voxel-wise SF tuning profiles in the early visual cortex (V1–V3). By measuring these changes
-                            in a task-irrelevant hemifield, we were able to <b>isolate the global effects of
-                                feature-based attention</b> as they spread across the visual field. We discovered that
-                            attention elicits significant <b>"attractive shifts"</b> in SF preference toward the
-                            attended frequency, demonstrating that neural populations flexibly adjust their tuning to
-                            prioritize task-relevant details. This work provides direct evidence that voluntary
-                            attention can dynamically reconfigure the fundamental building blocks of early human vision.
-                        </p>
+                    <div class="project-item expandable-project-item">
+                        <div class="project-content">
+                            <div class="project-text">
+                                <h3>Attention Alters Population Spatial Frequency Tuning</h3>
+                                <p class="citation"><b>Ramirez, L. D.</b>, Wang, F. & Ling, S. 2025. Attention alters
+                                    population spatial frequency tuning. <i>Journal of Neuroscience</i>. <a
+                                        href="https://doi.org/10.1523/JNEUROSCI.0251-25.2025"
+                                        target="_blank">https://doi.org/10.1523/JNEUROSCI.0251-25.2025</a>.</p>
+                                <p>This project utilized <b>pSFT</b> to investigate how feature-based attention reshapes
+                                    voxel-wise SF tuning profiles in the early visual cortex (V1–V3). By measuring these changes
+                                    in a task-irrelevant hemifield, we were able to <b>isolate the global effects of
+                                        feature-based attention</b> as they spread across the visual field. We discovered that
+                                    attention elicits significant <b>"attractive shifts"</b> in SF preference toward the
+                                    attended frequency, demonstrating that neural populations flexibly adjust their tuning to
+                                    prioritize task-relevant details. This work provides direct evidence that voluntary
+                                    attention can dynamically reconfigure the fundamental building blocks of early human vision.
+                                </p>
+                            </div>
+                            <div class="project-image">
+                                <img src="assets/project_figures/Attention alters population spatial frequency tuning.jpg"
+                                    alt="Attention Alters Population Spatial Frequency Tuning Figure">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="project-item">
-                        <h3>Emotion Alters Population Spatial Frequency Tuning</h3>
-                        <p class="citation"><b>Ramirez, L. D.</b>, Pan, J., & Ling, S. 2024 “How does emotional
-                            arousal modulate population spatial frequency tuning?” <i>Poster</i>. Vision Sciences
-                            Society Conference. <a href="https://doi.org/10.1167/jov.24.10.912"
-                                target="_blank">https://doi.org/10.1167/jov.24.10.912</a></p>
-                        <p>This study used <b>pSFT</b> to measure how negative emotion reconfigures SF tuning. Negative
-                            emotion was induced using <b>valenced auditory stimuli</b> while
-                            measuring SF tuning in the early visual cortex. Contrary to the long-held belief that
-                            negative emotion solely sacrifices fine detail for coarse "gist," we found that negative
-                            emotion triggered systematic <b>increases in preferred SF and selectivity</b>,
-                            particularly in the extrastriate cortex. In other words, the visual system can dynamically
-                            increase spatial resolution to enhance the processing of fine details during states of
-                            negative emotion.</p>
+                    <div class="project-item expandable-project-item">
+                        <div class="project-content">
+                            <div class="project-text">
+                                <h3>Emotion Alters Population Spatial Frequency Tuning</h3>
+                                <p class="citation"><b>Ramirez, L. D.</b>, Pan, J., & Ling, S. 2024 “How does emotional
+                                    arousal modulate population spatial frequency tuning?” <i>Poster</i>. Vision
+                                    Sciences
+                                    Society Conference. <a href="https://doi.org/10.1167/jov.24.10.912"
+                                        target="_blank">https://doi.org/10.1167/jov.24.10.912</a></p>
+                                <p>This study used <b>pSFT</b> to measure how negative emotion reconfigures SF tuning.
+                                    Negative
+                                    emotion was induced using <b>valenced auditory stimuli</b> while
+                                    measuring SF tuning in the early visual cortex. Contrary to the long-held belief
+                                    that
+                                    negative emotion solely sacrifices fine detail for coarse "gist," we found that
+                                    negative
+                                    emotion triggered systematic <b>increases in preferred SF and selectivity</b>,
+                                    particularly in the extrastriate cortex. In other words, the visual system can
+                                    dynamically
+                                    increase spatial resolution to enhance the processing of fine details during states
+                                    of
+                                    negative emotion.</p>
+                            </div>
+                            <div class="project-image">
+                                <img src="assets/project_figures/Emotion alters population spatial frequency tuning.jpg"
+                                    alt="Emotion Project Figure">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="project-item">
-                        <h3>Spatial Frequency Tuning Follows Scale Invariance</h3>
-                        <p class="citation">Wiecek, E., <b>Ramirez, L. D.</b>, Klimova, M., & Ling, S. 2026. Spatial
-                            frequency tuning follows scale invariance in human visual cortex. <i>Journal of
-                                Neuroscience</i>. <a href="https://doi.org/10.1523/JNEUROSCI.1490-25.2025"
-                                target="_blank">https://doi.org/10.1523/JNEUROSCI.1490-25.2025</a>.</p>
-                        <p>Here we provide a direct test of the <b>scale invariance</b> principle in the human visual
-                            cortex—the theory that the resolution of spatial sampling remains constant relative to
-                            receptive field (RF) size. By introducing the <b>"Cycles Per Receptive Field" (CPF)</b>
-                            metric, we showed that SF preferences scale inversely with population RF size across V1–V3.
-                            This project combined <b>population receptive field (pRF) mapping</b> with <b>pSFT</b> to
-                            characterize the functional sampling properties of neural populations across the visual
-                            field. Our findings validate a fundamental assumption in visual neuroscience and establish a
-                            new framework for studying atypical visual development.</p>
+                    <div class="project-item expandable-project-item">
+                        <div class="project-content">
+                            <div class="project-text">
+                                <h3>Spatial Frequency Tuning Follows Scale Invariance in the Human Visual Cortex</h3>
+                                <p class="citation">Wiecek, E., <b>Ramirez, L. D.</b>, Klimova, M., & Ling, S. 2026. Spatial
+                                    frequency tuning follows scale invariance in human visual cortex. <i>Journal of
+                                        Neuroscience</i>. <a href="https://doi.org/10.1523/JNEUROSCI.1490-25.2025"
+                                        target="_blank">https://doi.org/10.1523/JNEUROSCI.1490-25.2025</a>.</p>
+                                <p>Here we provide a direct test of the <b>scale invariance</b> principle in the human visual
+                                    cortex—the theory that the resolution of spatial sampling remains constant relative to
+                                    receptive field (RF) size. By introducing the <b>"Cycles Per Receptive Field" (CPF)</b>
+                                    metric, we showed that SF preferences scale inversely with population RF size across V1–V3.
+                                    This project combined <b>population receptive field (pRF) mapping</b> with <b>pSFT</b> to
+                                    characterize the functional sampling properties of neural populations across the visual
+                                    field. Our findings validate a fundamental assumption in visual neuroscience and establish a
+                                    new framework for studying atypical visual development.</p>
+                            </div>
+                            <div class="project-image">
+                                <img src="assets/project_figures/Spatial frequency tuning follows scale invariance in the human visual cortex.jpg"
+                                    alt="Scale Invariance Figure">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="project-item">
-                        <h3>Temporal Attention Selectively Enhances Target Features</h3>
-                        <p class="citation"><b>Ramirez, L. D.</b>, Foster, J. J., & Ling, S. 2021. Temporal attention
-                            selectively enhances target features. <i>Journal of Vision</i>. <a
-                                href="https://doi.org/10.1167/jov.21.6.6"
-                                target="_blank">https://doi.org/10.1167/jov.21.6.6</a>.</p>
-                        <p>This research examined the computational mechanisms of <b>temporal attention</b>—the
-                            allocation of attention to a specific moment in time. Using a fine-orientation
-                            discrimination task paired with an <b>equivalent noise paradigm</b>, we teased apart how
-                            attention improves perception under varying levels of external noise. Formal model
-                            comparisons revealed that temporal attention acts through a combination of <b>signal and
-                                stimulus enhancement</b>, selectively increasing gain for target features. By fitting
-                            variants of a <b>divisive normalization model</b> to behavioral data, we provided evidence
-                            that the brain can selectively "tune in" to relevant signals even when they are embedded in
-                            noise.</p>
+                    <div class="project-item expandable-project-item">
+                        <div class="project-content">
+                            <div class="project-text">
+                                <h3>Temporal Attention Selectively Enhances Target Features</h3>
+                                <p class="citation"><b>Ramirez, L. D.</b>, Foster, J. J., & Ling, S. 2021. Temporal attention
+                                    selectively enhances target features. <i>Journal of Vision</i>. <a
+                                        href="https://doi.org/10.1167/jov.21.6.6"
+                                        target="_blank">https://doi.org/10.1167/jov.21.6.6</a>.</p>
+                                <p>This research examined the computational mechanisms of <b>temporal attention</b>—the
+                                    allocation of attention to a specific moment in time. Using a fine-orientation
+                                    discrimination task paired with an <b>equivalent noise paradigm</b>, we teased apart how
+                                    attention improves perception under varying levels of external noise. Formal model
+                                    comparisons revealed that temporal attention acts through a combination of <b>signal and
+                                        stimulus enhancement</b>, selectively increasing gain for target features. By fitting
+                                    variants of a <b>divisive normalization model</b> to behavioral data, we provided evidence
+                                    that the brain can selectively "tune in" to relevant signals even when they are embedded in
+                                    noise.</p>
+                            </div>
+                            <div class="project-image">
+                                <img src="assets/project_figures/Temporal attention selectively enhances target features.jpg"
+                                    alt="Temporal Attention Figure">
+                            </div>
+                        </div>
                     </div>
 
-                    <p>Last updated: 01.24.2026</p>
+                    <p>Last updated: 02.05.2026</p>
                 </div>
             </section>
 
@@ -163,12 +255,11 @@
                     <ul class="pub-list">
                         <li>
                             <span class="year">2026</span>
-                            <span class="title">The Population Spatial Frequency Toolbox</span>
+                            <span class="title"><a href="https://doi.org/10.5334/jors.610" target="_blank">The
+                                    Population Spatial Frequency Toolbox</a></span>
                             <span class="authors"><b>Ramirez, L. D.</b>, Wang, F., Wiecek, E., Vinke, L. N., & Ling,
                                 S.</span>
-                            <span class="journal"><i>Journal of Open Research Software</i>. <a
-                                    href="https://github.com/luisdramirez/pSF-Toolbox" target="_blank">In
-                                    Press.</a></span>
+                            <span class="journal"><i>Journal of Open Research Software</i></span>
                         </li>
                         <li>
                             <span class="year">2026</span>
@@ -195,11 +286,173 @@
                     </ul>
                     <p style="margin-top: 2rem;"><a href="https://scholar.google.com/citations?user=M6b2yYQAAAAJ&hl=en"
                             target="_blank">Google Scholar</a></p>
-                    <p>Last updated: 01.24.2026</p>
+                    <p>Last updated: 02.05.2026</p>
+                </div>
+            </section>
+
+            <section id="presentations" class="tab-content">
+                <div class="fade-group">
+                    <h3>Invited Talks</h3>
+                    <ul class="pub-list">
+                        <li>
+                            <span class="year">2023</span>
+                            <span class="title">Experimental Psychology: Cognitive Neuroscience</span>
+                            <span class="journal">Boston University CAS NE 329</span>
+                        </li>
+                        <li>
+                            <span class="year">2022</span>
+                            <span class="title">Experimental Psychology: Cognitive Neuroscience</span>
+                            <span class="journal">Boston University CAS NE 329</span>
+                        </li>
+                    </ul>
+
+                    <h3 style="margin-top: 2rem;">Conference Presentations</h3>
+                    <ul class="pub-list">
+                        <li>
+                            <span class="year">2025</span>
+                            <span class="title">How feature-based attention alters representations in human visual
+                                cortex</span>
+                            <span class="authors">Ling, S., Foster, J. J., Wang, F., & Ramirez, L. D.</span>
+                            <span class="journal">Talk. Vision Sciences Society Conference. St. Pete Beach, FL</span>
+                        </li>
+                        <li>
+                            <span class="year">2024</span>
+                            <span class="title">How does emotional arousal modulate population spatial frequency
+                                tuning</span>
+                            <span class="authors">Ramirez, L. D., Pan, J., & Ling, S.</span>
+                            <span class="journal">Poster. Vision Sciences Society Conference. St. Pete Beach, FL</span>
+                        </li>
+                        <li>
+                            <span class="year">2024</span>
+                            <span class="title">Are visual deficits in amblyopia driven by spatial frequency
+                                tuning?</span>
+                            <span class="authors">Wiecek, E., Ramirez, L. D., Klimova, M., & Ling, S.</span>
+                            <span class="journal">Poster. Vision Sciences Society Conference. St. Pete Beach, FL</span>
+                        </li>
+                        <li>
+                            <span class="year">2024</span>
+                            <span class="title">Is the loss of spatial resolution in amblyopia linked to a deviation in
+                                scale invariance?</span>
+                            <span class="authors">Wiecek, E., Klimova, M., Ramirez, L. D., & Ling, S.</span>
+                            <span class="journal">Poster. Association for Research in Vision and Ophthalmology
+                                Conference. Seattle, WA</span>
+                        </li>
+                        <li>
+                            <span class="year">2023</span>
+                            <span class="title">Feature-based attention modulates spatial frequency processing in early
+                                human visual cortex</span>
+                            <span class="authors">Ramirez, L. D., Wang, F., Ling, S.</span>
+                            <span class="journal">Poster. Vision Sciences Society Conference. St. Pete Beach, FL</span>
+                        </li>
+                        <li>
+                            <span class="year">2023</span>
+                            <span class="title">Characterizing the relationship between population spatial frequency
+                                tuning and receptive field size</span>
+                            <span class="authors">Wiecek, E., Ramirez, L. D. Klimova, M., & Ling, S.</span>
+                            <span class="journal">Poster. Vision Sciences Society Conference. St. Pete Beach, FL</span>
+                        </li>
+                        <li>
+                            <span class="year">2022</span>
+                            <span class="title">How does feature-based attention modulate spatial frequency processing
+                                in early human visual cortex?</span>
+                            <span class="authors">Ramirez, L. D., Wang, F., Ling, S.</span>
+                            <span class="journal">Poster. Society for Neuroscience Conference. San Diego, CA</span>
+                        </li>
+                        <li>
+                            <span class="year">2021</span>
+                            <span class="title">What mechanisms underlie top-down modulation of human visual
+                                cortex?</span>
+                            <span class="authors">Ramirez, L. D.</span>
+                            <span class="journal">Talk. Writing Your Own Blueprint: The NIH Blueprint Diversity
+                                Conference. Virtual</span>
+                        </li>
+                        <li>
+                            <span class="year">2020</span>
+                            <span class="title">Temporal attention selectively enhances gain only for target
+                                features</span>
+                            <span class="authors">Ramirez, L. D., Foster, J. J., Ling, S.</span>
+                            <span class="journal">Talk. Vision Sciences Society Conference. Virtual</span>
+                        </li>
+                        <li>
+                            <span class="year">2019</span>
+                            <span class="title">Spatial location does not elicit normalization in visual memory</span>
+                            <span class="authors">Ramirez, L. D., Schwartz, J., Bloem, I. M., Ling, S., Kibbe, M.
+                                M.</span>
+                            <span class="journal">Poster. Vision Sciences Society Conference. St. Pete Beach, FL</span>
+                        </li>
+                        <li>
+                            <span class="year">2019</span>
+                            <span class="title">Exogenous temporal attention improves perception via signal
+                                enhancement</span>
+                            <span class="authors">Ramirez, L. D.</span>
+                            <span class="journal">Talk. Boston University Brain, Behavior, & Cognition Student Seminar.
+                                Boston, MA</span>
+                        </li>
+                        <li>
+                            <span class="year">2018</span>
+                            <span class="title">Temporal attention enhances visual perception through both signal
+                                enhancement and noise exclusion</span>
+                            <span class="authors">Ramirez, L. D., Ling, S.</span>
+                            <span class="journal">Poster. Vision Sciences Society Conference. St. Pete Beach, FL</span>
+                        </li>
+                        <li>
+                            <span class="year">2016</span>
+                            <span class="title">Development and evaluation of a new test of face perception and face
+                                memory ability</span>
+                            <span class="authors">Ramirez, L. D., Park, Y., Tong, F.</span>
+                            <span class="journal">Poster. Society for Neuroscience Conference. San Diego, CA</span>
+                        </li>
+                        <li>
+                            <span class="year">2016</span>
+                            <span class="title">Evaluation of a new test of face perception and face memory
+                                ability</span>
+                            <span class="authors">Ramirez, L. D., Park, Y., Tong, F.</span>
+                            <span class="journal">Poster. Vanderbilt Summer Science Academy. Nashville, TN</span>
+                        </li>
+                        <li>
+                            <span class="year">2015</span>
+                            <span class="title">Emergence in the Fractional Quantum Hall Effect</span>
+                            <span class="authors">Ramirez, L. D., Bain, J.</span>
+                            <span class="journal">Poster. New York University Tandon Summer Undergraduate Research
+                                Program. Brooklyn, NY</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="awards" class="tab-content">
+                <div class="fade-group">
+                    <ul class="pub-list">
+                        <li>
+                            <span class="year">2021–present</span>
+                            <span class="title"><a href="https://reporter.nih.gov/project-details/10702161" target="_blank">F99/K00 NIH Blueprint and BRAIN Initiative D-SPAN Award</a></span>
+                        </li>
+                        <li>
+                            <span class="year">2021</span>
+                            <span class="title">Hispanic Scholarship Fund (HSF) Scholar</span>
+                        </li>
+                        <li>
+                            <span class="year">2020</span>
+                            <span class="title">BU Diversity & Inclusion: Inclusion Catalyst Grant</span>
+                        </li>
+                        <li>
+                            <span class="year">2020</span>
+                            <span class="title">HHMI Gilliam Fellowship for Advanced Study Nominee</span>
+                        </li>
+                        <li>
+                            <span class="year">2017</span>
+                            <span class="title">NYU Tandon Achievement in Science and Technology Studies</span>
+                        </li>
+                        <li>
+                            <span class="year">2017</span>
+                            <span class="title">R25 NIH Blueprint ENDURE Fellowship</span>
+                        </li>
+                    </ul>
                 </div>
             </section>
         </main>
     </div>
+    <div id="project-portal"></div>
     <div id="noise-overlay" class="noise-overlay">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <filter id="noiseFilter">

@@ -4,6 +4,57 @@ document.addEventListener('DOMContentLoaded', () => {
         ENABLE_NOISE_ANIMATION: false // Set to true to enable the SF sweep animation
     };
 
+    // Profile picture: fade in when image has loaded (so it fades on refresh instead of popping in)
+    const profileImg = document.querySelector('.profile-picture');
+    const profileWrapper = document.querySelector('.profile-picture-wrapper');
+    if (profileImg && profileWrapper) {
+        function showProfilePicture() {
+            profileWrapper.classList.add('profile-picture-loaded');
+        }
+        if (profileImg.complete && profileImg.naturalHeight > 0) {
+            requestAnimationFrame(showProfilePicture);
+        } else {
+            profileImg.addEventListener('load', showProfilePicture);
+        }
+    }
+
+    // Theme: restore saved preference, then system preference
+    const THEME_KEY = 'site-theme';
+    const html = document.documentElement;
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === 'dark') {
+        html.classList.add('dark-mode');
+        html.classList.remove('light-mode');
+    } else if (saved === 'light') {
+        html.classList.add('light-mode');
+        html.classList.remove('dark-mode');
+    } else {
+        html.classList.remove('dark-mode', 'light-mode');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        function updateIcon() {
+            const isDark = html.classList.contains('dark-mode');
+            themeToggle.classList.toggle('dark-active', isDark);
+            themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+        updateIcon();
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.classList.contains('dark-mode');
+            if (isDark) {
+                html.classList.remove('dark-mode');
+                html.classList.add('light-mode');
+                localStorage.setItem(THEME_KEY, 'light');
+            } else {
+                html.classList.add('dark-mode');
+                html.classList.remove('light-mode');
+                localStorage.setItem(THEME_KEY, 'dark');
+            }
+            updateIcon();
+        });
+    }
+
     // Handle CV Link separately
     const cvLink = document.getElementById('cv-link');
     if (cvLink) {
@@ -85,10 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentActive.classList.remove('active');
                 currentActive.style.display = 'none';
 
-                // Activate new tab
+                // Activate new tab (use flex for landing so centering works)
                 const newTab = document.getElementById(targetTab);
                 if (newTab) {
-                    newTab.style.display = 'block';
+                    newTab.style.display = targetTab === 'landing' ? 'flex' : 'block';
                     // Trigger reflow
                     void newTab.offsetWidth;
                     newTab.classList.add('active');
@@ -101,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newTab = document.getElementById(targetTab);
             if (newTab) {
                 newTab.classList.add('active');
-                newTab.style.display = 'block';
+                newTab.style.display = targetTab === 'landing' ? 'flex' : 'block';
                 setTimeout(() => newTab.style.opacity = '1', 10);
                 // Reset scroll
                 document.querySelector('.content').scrollTop = 0;
@@ -128,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show new tab immediately (it's hidden by noise overlay)
         const newTab = document.getElementById(targetTab);
         if (newTab) {
-            newTab.style.display = 'block';
+            newTab.style.display = targetTab === 'landing' ? 'flex' : 'block';
             newTab.classList.add('active');
             newTab.style.opacity = '1';
             // Reset scroll
@@ -164,5 +215,80 @@ document.addEventListener('DOMContentLoaded', () => {
             // For now, let's just trigger the click so it behaves consistently.
             activeLink.click();
         }
+    }
+
+    // Project Expansion Logic
+    const projectItems = document.querySelectorAll('.expandable-project-item');
+    const projectPortal = document.getElementById('project-portal');
+
+    if (projectItems.length > 0 && projectPortal) {
+        let isAnimating = false;
+        let closeTimeout = null;
+
+        const closePanel = (wrapper, originalProject) => {
+            isAnimating = true;
+            wrapper.classList.remove('visible');
+            setTimeout(() => {
+                wrapper.remove();
+                if (originalProject) {
+                    originalProject.classList.remove('showing-expanded');
+                }
+                setTimeout(() => { isAnimating = false; }, 50);
+            }, 300);
+        };
+
+        const scheduleClose = (wrapper, originalProject) => {
+            if (closeTimeout) clearTimeout(closeTimeout);
+            closeTimeout = setTimeout(() => {
+                closePanel(wrapper, originalProject);
+            }, 150); // Grace period
+        };
+
+        const cancelClose = () => {
+            if (closeTimeout) clearTimeout(closeTimeout);
+        };
+
+        projectItems.forEach(projectItem => {
+            const imageWrapper = projectItem.querySelector('.project-image');
+            if (!imageWrapper) return;
+
+            imageWrapper.addEventListener('mouseenter', () => {
+                if (isAnimating || document.querySelector('.project-expanded-wrapper')) {
+                    cancelClose(); // If already open, just cancel any pending close
+                    return;
+                }
+                
+                projectItem.classList.add('showing-expanded');
+                const clone = projectItem.cloneNode(true);
+                clone.classList.add('expanded');
+                clone.classList.remove('showing-expanded');
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'project-expanded-wrapper';
+                const overlay = document.createElement('div');
+                overlay.className = 'project-expanded-overlay';
+                wrapper.appendChild(overlay);
+                wrapper.appendChild(clone);
+                projectPortal.appendChild(wrapper);
+
+                // Animate in
+                requestAnimationFrame(() => {
+                    wrapper.classList.add('visible');
+                });
+
+                // Events for the Clone
+                clone.addEventListener('mouseenter', cancelClose);
+                clone.addEventListener('mouseleave', () => scheduleClose(wrapper, projectItem));
+            });
+
+            // Events for the Original
+            imageWrapper.addEventListener('mouseleave', () => {
+                // We need to pass the current wrapper/clone if they exist
+                const wrapper = document.querySelector('.project-expanded-wrapper');
+                if (wrapper) {
+                    scheduleClose(wrapper, projectItem);
+                }
+            });
+        });
     }
 });
