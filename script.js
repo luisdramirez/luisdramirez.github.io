@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     cancelClose(); // If already open, just cancel any pending close
                     return;
                 }
-                
+
                 projectItem.classList.add('showing-expanded');
                 const clone = projectItem.cloneNode(true);
                 clone.classList.add('expanded');
