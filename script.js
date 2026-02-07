@@ -376,7 +376,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const contentDiv = document.createElement('div');
                 contentDiv.className = 'expandable-project-item expanded';
                 // Adjust styles for single image content
-                contentDiv.style.width = 'auto'; 
+                if (window.innerWidth <= 768 || hasTouched) {
+                    contentDiv.style.width = '95vw';
+                } else {
+                    contentDiv.style.width = 'auto';
+                }
                 contentDiv.style.maxWidth = '95vw'; 
                 contentDiv.style.padding = '0';
                 contentDiv.style.overflow = 'hidden';
@@ -432,8 +436,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Events
                 contentDiv.addEventListener('mouseenter', cancelClose);
-                contentDiv.addEventListener('mouseleave', () => {
+                contentDiv.addEventListener('mouseleave', (e) => {
                     if (hasTouched) return;
+                    // If moving back to trigger, don't close
+                    if (e.relatedTarget === trigger || trigger.contains(e.relatedTarget)) {
+                        return;
+                    }
                     scheduleClose(wrapper);
                 });
 
@@ -453,10 +461,17 @@ document.addEventListener('DOMContentLoaded', () => {
             trigger.addEventListener('mouseenter', showPopup);
             trigger.addEventListener('click', showPopup);
 
-            trigger.addEventListener('mouseleave', () => {
+            trigger.addEventListener('mouseleave', (e) => {
                 if (hasTouched) return; // Don't close on mouseleave for touch
+                
+                // If moving into the popup, don't close
+                // We can check relatedTarget to see where mouse went
                 const wrapper = document.querySelector('.project-expanded-wrapper');
                 if (wrapper) {
+                    const contentDiv = wrapper.querySelector('.expandable-project-item');
+                    if (contentDiv && (e.relatedTarget === contentDiv || contentDiv.contains(e.relatedTarget))) {
+                        return;
+                    }
                     scheduleClose(wrapper);
                 }
             });
