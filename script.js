@@ -337,7 +337,12 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         revealTriggers.forEach(trigger => {
-            trigger.addEventListener('mouseenter', () => {
+            const showPopup = (e) => {
+                if (e && e.type === 'click') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+
                 if (isAnimating || document.querySelector('.project-expanded-wrapper')) {
                     cancelClose();
                     return;
@@ -406,7 +411,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlay.addEventListener('click', () => {
                     closePanel(wrapper);
                 });
-            });
+            };
+
+            trigger.addEventListener('mouseenter', showPopup);
+            trigger.addEventListener('click', showPopup);
 
             trigger.addEventListener('mouseleave', () => {
                 const wrapper = document.querySelector('.project-expanded-wrapper');
