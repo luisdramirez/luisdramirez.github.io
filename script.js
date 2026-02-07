@@ -309,4 +309,111 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Hover Reveal Logic (for Featured Research)
+    const revealTriggers = document.querySelectorAll('.hover-reveal-trigger');
+    if (revealTriggers.length > 0 && projectPortal) {
+        let isAnimating = false;
+        let closeTimeout = null;
+
+        const closePanel = (wrapper) => {
+            isAnimating = true;
+            wrapper.classList.remove('visible');
+            setTimeout(() => {
+                wrapper.remove();
+                setTimeout(() => { isAnimating = false; }, 50);
+            }, 300);
+        };
+
+        const scheduleClose = (wrapper) => {
+            if (closeTimeout) clearTimeout(closeTimeout);
+            closeTimeout = setTimeout(() => {
+                closePanel(wrapper);
+            }, 150);
+        };
+
+        const cancelClose = () => {
+            if (closeTimeout) clearTimeout(closeTimeout);
+        };
+
+        revealTriggers.forEach(trigger => {
+            trigger.addEventListener('mouseenter', () => {
+                if (isAnimating || document.querySelector('.project-expanded-wrapper')) {
+                    cancelClose();
+                    return;
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'project-expanded-wrapper';
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'project-expanded-overlay';
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'expandable-project-item expanded';
+                // Adjust styles for single image content
+                contentDiv.style.width = 'auto'; 
+                contentDiv.style.maxWidth = '90vw';
+                contentDiv.style.padding = '0';
+                contentDiv.style.overflow = 'hidden';
+                contentDiv.style.background = 'transparent';
+                contentDiv.style.boxShadow = 'none';
+
+                const img = document.createElement('img');
+                img.src = trigger.dataset.revealImage;
+                img.alt = 'Featured Research Preview';
+                img.style.width = '100%';
+                img.style.height = 'auto';
+                img.style.maxWidth = '800px'; // Cap width
+                img.style.display = 'block';
+                img.style.borderRadius = '8px';
+                img.style.boxShadow = '0 10px 40px rgba(0,0,0,0.5)';
+                
+                // Add close button
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'close-project-btn';
+                closeBtn.innerHTML = '&times;';
+                closeBtn.style.color = '#fff'; // White text since background might be dark/transparent
+                closeBtn.style.background = 'rgba(0,0,0,0.5)';
+                closeBtn.style.borderRadius = '50%';
+                closeBtn.style.width = '30px';
+                closeBtn.style.height = '30px';
+                closeBtn.style.display = 'flex';
+                closeBtn.style.alignItems = 'center';
+                closeBtn.style.justifyContent = 'center';
+                closeBtn.style.fontSize = '20px';
+                
+                contentDiv.appendChild(closeBtn);
+                contentDiv.appendChild(img);
+                wrapper.appendChild(overlay);
+                wrapper.appendChild(contentDiv);
+                projectPortal.appendChild(wrapper);
+
+                // Animate in
+                requestAnimationFrame(() => {
+                    wrapper.classList.add('visible');
+                });
+
+                // Events
+                contentDiv.addEventListener('mouseenter', cancelClose);
+                contentDiv.addEventListener('mouseleave', () => scheduleClose(wrapper));
+
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closePanel(wrapper);
+                });
+
+                overlay.addEventListener('click', () => {
+                    closePanel(wrapper);
+                });
+            });
+
+            trigger.addEventListener('mouseleave', () => {
+                const wrapper = document.querySelector('.project-expanded-wrapper');
+                if (wrapper) {
+                    scheduleClose(wrapper);
+                }
+            });
+        });
+    }
 });

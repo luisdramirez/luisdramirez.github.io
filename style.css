@@ -316,7 +316,7 @@ b {
     width: 100%;
     height: 100%;
     /* Soft white inner glow to blur edges */
-    box-shadow: inset 0 0 5px 2px var(--profile-edge);
+    box-shadow: inset 0 0 2px 2px var(--profile-edge);
     pointer-events: none;
 }
 
@@ -431,7 +431,8 @@ b {
     background: var(--overlay-dim);
     backdrop-filter: blur(5px);
     z-index: 0;
-    pointer-events: auto; /* Allow clicking overlay to close */
+    pointer-events: auto;
+    /* Allow clicking overlay to close */
     cursor: pointer;
 }
 
@@ -541,7 +542,15 @@ a:hover {
     font-size: 1.05em;
 }
 
-/* Noise Overlay */
+/* Hover Reveal Trigger */
+.hover-reveal-trigger {
+    cursor: help;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--text-muted);
+}
+
 .noise-overlay {
     position: fixed;
     top: 0;
