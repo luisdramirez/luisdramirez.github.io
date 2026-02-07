@@ -263,6 +263,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 clone.classList.add('expanded');
                 clone.classList.remove('showing-expanded');
 
+                // Create close button
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'close-project-btn';
+                closeBtn.innerHTML = '&times;';
+                closeBtn.setAttribute('aria-label', 'Close project details');
+                clone.appendChild(closeBtn);
+
                 const wrapper = document.createElement('div');
                 wrapper.className = 'project-expanded-wrapper';
                 const overlay = document.createElement('div');
@@ -279,6 +286,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Events for the Clone
                 clone.addEventListener('mouseenter', cancelClose);
                 clone.addEventListener('mouseleave', () => scheduleClose(wrapper, projectItem));
+
+                // Close on button click
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent bubbling
+                    closePanel(wrapper, projectItem);
+                });
+
+                // Close on overlay click
+                overlay.addEventListener('click', () => {
+                    closePanel(wrapper, projectItem);
+                });
             });
 
             // Events for the Original

@@ -431,6 +431,8 @@ b {
     background: var(--overlay-dim);
     backdrop-filter: blur(5px);
     z-index: 0;
+    pointer-events: auto; /* Allow clicking overlay to close */
+    cursor: pointer;
 }
 
 /* Hide original when expanded clone is shown */
@@ -503,6 +505,26 @@ b {
 
 .expandable-project-item.expanded .project-text {
     font-size: 1.1rem;
+}
+
+/* Close button for expanded project */
+.close-project-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 100002;
+    line-height: 1;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.close-project-btn:hover {
+    color: var(--link-hover);
 }
 
 a {
