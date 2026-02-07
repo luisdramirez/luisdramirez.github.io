@@ -549,6 +549,15 @@ a:hover {
     text-decoration-style: dotted;
     text-underline-offset: 3px;
     text-decoration-color: var(--text-muted);
+    padding: 2px 0; /* Slight padding */
+    align-self: flex-start; /* Prevent full width in flex container */
+    max-width: fit-content; /* Ensure it only takes up necessary width */
+}
+
+/* Improve hit area on touch devices */
+body.is-touch-device .hover-reveal-trigger {
+    padding: 10px 0; /* Larger vertical hit area */
+    display: inline-block; /* Ensure padding works */
 }
 
 .noise-overlay {

@@ -310,6 +310,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Global touch detection
+    let hasTouched = false;
+    window.addEventListener('touchstart', () => {
+        hasTouched = true;
+        // Add a class to body for potential CSS adjustments
+        document.body.classList.add('is-touch-device');
+    }, { capture: true, once: true });
+
     // Hover Reveal Logic (for Featured Research)
     const revealTriggers = document.querySelectorAll('.hover-reveal-trigger');
     if (revealTriggers.length > 0 && projectPortal) {
@@ -338,7 +346,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         revealTriggers.forEach(trigger => {
             const showPopup = (e) => {
-                if (e && e.type === 'click') {
+                // Ignore mouseenter if we know this is a touch device
+                if (e.type === 'mouseenter' && hasTouched) {
+                    return; 
+                }
+
+                if (e.type === 'click') {
                     e.preventDefault();
                     e.stopPropagation();
                 }
@@ -354,39 +367,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 const overlay = document.createElement('div');
                 overlay.className = 'project-expanded-overlay';
                 
+                // Allow mouse events to pass through overlay for desktop hover
+                // so the trigger remains hovered and doesn't fire mouseleave
+                if (e.type === 'mouseenter' && !hasTouched) {
+                    overlay.style.pointerEvents = 'none';
+                }
+                
                 const contentDiv = document.createElement('div');
                 contentDiv.className = 'expandable-project-item expanded';
                 // Adjust styles for single image content
                 contentDiv.style.width = 'auto'; 
-                contentDiv.style.maxWidth = '90vw';
+                contentDiv.style.maxWidth = '95vw'; 
                 contentDiv.style.padding = '0';
                 contentDiv.style.overflow = 'hidden';
                 contentDiv.style.background = 'transparent';
                 contentDiv.style.boxShadow = 'none';
+                // Ensure centered on mobile
+                contentDiv.style.left = '50%';
+                contentDiv.style.top = '50%';
+                contentDiv.style.transform = 'translate(-50%, -50%) scale(0.95)';
 
                 const img = document.createElement('img');
                 img.src = trigger.dataset.revealImage;
                 img.alt = 'Featured Research Preview';
                 img.style.width = '100%';
                 img.style.height = 'auto';
-                img.style.maxWidth = '800px'; // Cap width
                 img.style.display = 'block';
                 img.style.borderRadius = '8px';
                 img.style.boxShadow = '0 10px 40px rgba(0,0,0,0.5)';
+                // Remove max-width constraint on the image itself, let container control it
+                // But keep a reasonable cap for desktop
+                if (!hasTouched && window.innerWidth > 768) {
+                    img.style.maxWidth = '1000px';
+                }
                 
                 // Add close button
                 const closeBtn = document.createElement('button');
                 closeBtn.className = 'close-project-btn';
                 closeBtn.innerHTML = '&times;';
-                closeBtn.style.color = '#fff'; // White text since background might be dark/transparent
+                closeBtn.style.color = '#fff'; 
                 closeBtn.style.background = 'rgba(0,0,0,0.5)';
                 closeBtn.style.borderRadius = '50%';
-                closeBtn.style.width = '30px';
-                closeBtn.style.height = '30px';
+                closeBtn.style.width = '44px'; // Even larger target
+                closeBtn.style.height = '44px';
                 closeBtn.style.display = 'flex';
                 closeBtn.style.alignItems = 'center';
                 closeBtn.style.justifyContent = 'center';
-                closeBtn.style.fontSize = '20px';
+                closeBtn.style.fontSize = '28px';
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.style.top = '10px';
+                closeBtn.style.right = '10px';
                 
                 contentDiv.appendChild(closeBtn);
                 contentDiv.appendChild(img);
@@ -397,26 +427,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Animate in
                 requestAnimationFrame(() => {
                     wrapper.classList.add('visible');
+                    // CSS handles the scale transform to 1
                 });
 
                 // Events
                 contentDiv.addEventListener('mouseenter', cancelClose);
-                contentDiv.addEventListener('mouseleave', () => scheduleClose(wrapper));
+                contentDiv.addEventListener('mouseleave', () => {
+                    if (hasTouched) return;
+                    scheduleClose(wrapper);
+                });
 
-                closeBtn.addEventListener('click', (e) => {
+                const handleClose = (e) => {
+                    e.preventDefault();
                     e.stopPropagation();
                     closePanel(wrapper);
-                });
+                };
 
-                overlay.addEventListener('click', () => {
-                    closePanel(wrapper);
-                });
+                closeBtn.addEventListener('click', handleClose);
+                closeBtn.addEventListener('touchstart', handleClose, {passive: false});
+                overlay.addEventListener('click', handleClose);
+                overlay.addEventListener('touchstart', handleClose, {passive: false});
             };
 
+            trigger.addEventListener('touchstart', showPopup, {passive: false});
             trigger.addEventListener('mouseenter', showPopup);
             trigger.addEventListener('click', showPopup);
 
             trigger.addEventListener('mouseleave', () => {
+                if (hasTouched) return; // Don't close on mouseleave for touch
                 const wrapper = document.querySelector('.project-expanded-wrapper');
                 if (wrapper) {
                     scheduleClose(wrapper);
