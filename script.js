@@ -223,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (projectItems.length > 0 && projectPortal) {
         let isAnimating = false;
-        let closeTimeout = null;
 
         const closePanel = (wrapper, originalProject) => {
             isAnimating = true;
@@ -237,24 +236,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 300);
         };
 
-        const scheduleClose = (wrapper, originalProject) => {
-            if (closeTimeout) clearTimeout(closeTimeout);
-            closeTimeout = setTimeout(() => {
-                closePanel(wrapper, originalProject);
-            }, 150); // Grace period
-        };
-
-        const cancelClose = () => {
-            if (closeTimeout) clearTimeout(closeTimeout);
-        };
-
         projectItems.forEach(projectItem => {
             const imageWrapper = projectItem.querySelector('.project-image');
             if (!imageWrapper) return;
 
             imageWrapper.addEventListener('mouseenter', () => {
                 if (isAnimating || document.querySelector('.project-expanded-wrapper')) {
-                    cancelClose(); // If already open, just cancel any pending close
                     return;
                 }
 
@@ -283,10 +270,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     wrapper.classList.add('visible');
                 });
 
-                // Events for the Clone
-                clone.addEventListener('mouseenter', cancelClose);
-                clone.addEventListener('mouseleave', () => scheduleClose(wrapper, projectItem));
-
                 // Close on button click
                 closeBtn.addEventListener('click', (e) => {
                     e.stopPropagation(); // Prevent bubbling
@@ -297,15 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlay.addEventListener('click', () => {
                     closePanel(wrapper, projectItem);
                 });
-            });
-
-            // Events for the Original
-            imageWrapper.addEventListener('mouseleave', () => {
-                // We need to pass the current wrapper/clone if they exist
-                const wrapper = document.querySelector('.project-expanded-wrapper');
-                if (wrapper) {
-                    scheduleClose(wrapper, projectItem);
-                }
             });
         });
     }
